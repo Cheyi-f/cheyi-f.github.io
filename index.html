@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Faithfulness Gomna | AI Engineer</title>
+<meta name="description" content="Portfolio of Faithfulness Gomna, a Computer Engineering student building backend systems and AI-powered applications (RAG, APIs, TypeScript).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!--
+  BEFORE SUBMITTING: search this file for "TODO" and "YOUR-". Every highlighted dashed box on the page
+  is a fact I could not verify. Replace it with something true, or delete the sentence.
+  Links to replace: YOUR-GITHUB, YOUR-LINKEDIN, YOUR-CV-LINK, DOCUCHAT-REPO, DOCUCHAT-LIVE, GROUP-REPO, YOUR-EMAIL.
+-->
+<style>
+:root{
+ --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:40px;--s6:48px;--s8:64px;--s12:96px;
+ --ink:#171717;--muted:#525252;--line:#e5e5e5;--bg:#fff;--tint:#fafafa;
+ --green:#0F5132;--green-dark:#0a3a24;
+ --r:6px;--max:1200px;--t:180ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:clamp(1rem,.96rem + .2vw,1.125rem);line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:var(--green);text-underline-offset:3px;transition:color var(--t)}
+a:hover{color:var(--green-dark)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:var(--r)}
+.skip{position:absolute;left:var(--s2);top:-100px;background:var(--ink);color:#fff;padding:var(--s1) var(--s2);border-radius:var(--r);z-index:30}
+.skip:focus{top:var(--s2)}
+.container{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--s3)}
+
+/* Unverified content marker. Remove the class once the text is true. */
+.todo{background:#fff8d6;outline:1px dashed #b58900;outline-offset:2px;border-radius:3px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 var(--s3);font:600 1rem/1 Inter,system-ui,sans-serif;border-radius:var(--r);border:1px solid var(--line);text-decoration:none;transition:background-color var(--t),border-color var(--t),color var(--t);cursor:pointer}
+.btn--primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn--primary:hover{background:var(--green-dark);border-color:var(--green-dark);color:#fff}
+.btn--secondary{background:#fff;color:var(--ink);border-color:#d4d4d4}
+.btn--secondary:hover{border-color:var(--ink);color:var(--ink)}
+
+.nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;min-height:72px}
+.nav__brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.nav__brand:hover{color:var(--ink)}
+.nav__links{display:flex;align-items:center;gap:var(--s4)}
+.nav__links a:not(.btn){color:var(--ink);text-decoration:none;font-weight:500;font-size:.95rem}
+.nav__links a:not(.btn):hover{color:var(--green)}
+.nav__links .btn{min-height:40px;font-size:.95rem}
+.nav__toggle{display:none;min-height:44px;padding:0 var(--s2);background:#fff;border:1px solid #d4d4d4;border-radius:var(--r);font:500 .95rem Inter,system-ui,sans-serif;color:var(--ink);cursor:pointer}
+
+.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero__in{position:relative;padding-top:var(--s12);padding-bottom:var(--s12);pointer-events:none}
+.hero__copy{max-width:760px;pointer-events:auto}
+.hero__name{font-weight:700;letter-spacing:.04em;font-size:.95rem}
+.hero__role{font-weight:600;letter-spacing:.04em;font-size:.95rem;color:var(--green)}
+.hero__tags{font-weight:500;letter-spacing:.04em;font-size:.95rem;color:var(--muted);margin-bottom:var(--s4)}
+h1{font-size:clamp(2.25rem,1.4rem + 3.6vw,4rem);line-height:1.08;letter-spacing:-.035em;font-weight:700;max-width:14em}
+.lead{max-width:36em;margin-top:var(--s3);color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
+.status{display:inline-flex;align-items:center;gap:var(--s1);font-size:.9rem;font-weight:500;color:var(--muted);border:1px solid var(--line);background:#fff;border-radius:var(--r);padding:4px var(--s2);margin-bottom:var(--s4);text-decoration:none}
+.status__dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--green)}
+.status__dot::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--green);animation:ping 2.6s ease-out infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(3.4);opacity:0}}
+
+.section{padding:var(--s12) 0;border-bottom:1px solid var(--line)}
+.section--tint{background:var(--tint)}
+.head{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s3);margin-bottom:var(--s6);align-items:start}
+.head h2{grid-column:span 5}
+.head>p,.head>div{grid-column:7 / span 6;max-width:36em}
+h2{font-size:clamp(1.625rem,1.2rem + 1.6vw,2.5rem);line-height:1.15;letter-spacing:-.03em;font-weight:700}
+h3{font-size:1.125rem;line-height:1.3;letter-spacing:-.01em;font-weight:600;margin-bottom:var(--s2)}
+.note{margin-top:var(--s1);font-size:.9rem;color:var(--muted)}
+.head .actions{margin-top:var(--s3)}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.cards--4{grid-template-columns:repeat(4,1fr)}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);color:var(--ink);text-decoration:none;transition:border-color var(--t)}
+.card p{font-size:.95rem}
+.card p+p{margin-top:var(--s1)}
+.card strong{font-weight:600}
+.card:hover{border-color:#a3a3a3}
+.card li{padding:var(--s1) 0;border-top:1px solid var(--line);font-size:.95rem}
+.card li:first-child{border-top:0;padding-top:0}
+.links{display:flex;flex-direction:column;gap:4px;margin-top:var(--s2);font-size:.95rem;font-weight:500}
+.links--row{flex-direction:row;flex-wrap:wrap;gap:var(--s3)}
+
+/* Projects overview */
+.proj{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s3)}
+.proj .card{display:flex;flex-direction:column}
+.proj .links{margin-top:auto;padding-top:var(--s3)}
+.tag{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--green);margin-bottom:var(--s1)}
+.pill{display:inline-block;font-size:.8rem;font-weight:600;border:1px solid var(--line);border-radius:var(--r);padding:2px 10px;margin-left:var(--s1);color:var(--muted);text-transform:none;letter-spacing:0;vertical-align:middle}
+
+/* Case study */
+.cs{margin-bottom:var(--s12)}
+.cs:last-child{margin-bottom:0}
+.cs__title{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2);margin-bottom:var(--s4)}
+.cs__title h3{font-size:clamp(1.4rem,1.1rem + 1vw,2rem);letter-spacing:-.02em;margin:0}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s3)}
+.b{grid-column:span 4;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:var(--s4)}
+.b--12{grid-column:1 / -1}.b--6{grid-column:span 6}.b--8{grid-column:span 8}
+.b h4{margin:0 0 var(--s2);font-size:.95rem;font-weight:500;color:var(--muted)}
+.b p{font-size:.95rem}
+.b p+p,.b ul+p,.b p+ul{margin-top:var(--s1)}
+.b li{font-size:.95rem;padding:2px 0}
+.b--lead p{font-size:clamp(1.15rem,1rem + .8vw,1.5rem);line-height:1.35;letter-spacing:-.02em;font-weight:600}
+.b--dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.b--dark h4{color:#a3a3a3}
+.b--dark a{color:#fff}
+.b--dark .todo{color:var(--ink)}
+code{font-size:.88em;background:var(--tint);border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s1)}
+.chips li{border:1px solid var(--line);border-radius:var(--r);padding:4px 12px;font-size:.9rem;font-weight:500}
+.flow{--gap:32px;display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap);margin:var(--s2) 0}
+.flow li{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:var(--s2) var(--s1);text-align:center;font-weight:600;font-size:.9rem;background:#fff;animation:lit 9s linear infinite;animation-delay:calc(var(--i) * 1.5s)}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:100%;top:50%;width:var(--gap);height:1px;background:var(--line)}
+@keyframes lit{0%,14%{border-color:var(--green);color:var(--green)}18%,100%{border-color:var(--line);color:var(--ink)}}
+
+/* Skills / steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden}
+.steps li{padding:var(--s3);border-left:1px solid var(--line)}
+.steps li:first-child{border-left:0}
+.steps p{font-size:.95rem;color:var(--muted)}
+
+.footer{padding:var(--s4) 0;font-size:.95rem;color:var(--muted)}
+.footer__in{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);justify-content:space-between}
+.footer strong{color:var(--ink)}
+.footer__links{display:flex;gap:var(--s3)}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:40}
+.progress span{display:block;height:100%;background:var(--green);transform:scaleX(0);transform-origin:left}
+
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 500ms ease,transform 500ms ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1024px){
+ .cards,.cards--4{grid-template-columns:repeat(2,1fr)}
+ .head h2,.head>p,.head>div{grid-column:1 / -1}
+ .b,.b--8{grid-column:span 6}.b--12{grid-column:1 / -1}.b--8{grid-column:1 / -1}
+ .steps{grid-template-columns:repeat(2,1fr)}
+ .steps li:nth-child(3){border-left:0}
+ .steps li:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:720px){
+ .section{padding:var(--s8) 0}
+ .hero__in{padding-top:var(--s8);padding-bottom:var(--s8)}
+ .nav__toggle{display:inline-flex;align-items:center}
+ .nav__links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line);padding:var(--s1) var(--s3) var(--s3)}
+ .nav__links.open{display:flex}
+ .nav__links a:not(.btn){padding:var(--s2) 0;border-bottom:1px solid var(--line)}
+ .nav__links .btn{margin-top:var(--s2);min-height:48px}
+ .cards,.cards--4,.proj{grid-template-columns:1fr}
+ .b,.b--6,.b--8{grid-column:1 / -1}
+ .steps{grid-template-columns:1fr}
+ .steps li{border-left:0;border-top:1px solid var(--line)}
+ .steps li:first-child{border-top:0}
+ .flow{grid-template-columns:1fr;--gap:20px}
+ .flow li:not(:last-child)::after{left:50%;top:100%;width:1px;height:var(--gap)}
+ .actions .btn{flex:1 1 auto}
+}
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .reveal{opacity:1;transform:none;transition:none}
+ .flow li,.status__dot::after{animation:none}
+ *{transition-duration:0s!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="nav">
+ <div class="container nav__in">
+  <a class="nav__brand" href="#top">Faithfulness Gomna</a>
+  <button class="nav__toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+  <nav id="menu" class="nav__links" aria-label="Primary">
+   <a href="#work">Work</a>
+   <a href="#case-studies">Case studies</a>
+   <a href="#skills">Skills</a>
+   <a href="#about">About</a>
+   <a href="#contact">Contact</a>
+   <a class="btn btn--primary" href="https://drive.google.com/file/d/1Co8WPo4VmcILCQ-28m3ciy-jH_WCE47V/view?usp=drive_link">CV</a>
+  </nav>
+ </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-title">
+ <canvas id="dots" aria-hidden="true"></canvas>
+ <div class="container hero__in">
+  <div class="hero__copy">
+   <a class="status" href="#contact"><span class="status__dot" aria-hidden="true"></span>Open to opportunities</a>
+   <p class="hero__name">FAITHFULNESS GOMNA</p>
+   <p class="hero__role">AI ENGINEER IN TRAINING</p>
+   <p class="hero__tags">BACKEND / RAG SYSTEMS / TYPESCRIPT</p>
+   <h1 id="hero-title">Backend systems that make AI answers trustworthy.</h1>
+   <p class="lead">Computer Engineering student at FUT Minna, training in the Mastering Backend AI Engineering Bootcamp. I build APIs and retrieval-based AI features, and I care most about the unglamorous parts: validation, scoping, testing and knowing when the model should say "I don't know".</p>
+   <div class="actions">
+    <a class="btn btn--primary" href="#case-studies">Read the case studies</a>
+    <a class="btn btn--secondary" href="https://github.com/Cheyi-f">GitHub</a>
+    <a class="btn btn--secondary" href="https://linkedin.com/in/faithfulness-alexander-99602a28a">LinkedIn</a>
+    <a class="btn btn--secondary" href="https://drive.google.com/file/d/1Co8WPo4VmcILCQ-28m3ciy-jH_WCE47V/view?usp=drive_link">CV</a>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="work" aria-labelledby="work-title">
+ <div class="container">
+  <div class="head">
+   <h2 id="work-title">Selected Work</h2>
+   <p>Two projects: one I built through the bootcamp, one I built with a team. Each has a full write-up below.</p>
+  </div>
+  <div class="proj">
+   <div class="card">
+    <p class="tag">Guided bootcamp project <span class="pill">In progress</span></p>
+    <h3>DocuChat</h3>
+    <p><strong>Problem.</strong> Finding a specific fact inside long documents is slow, and a chatbot that guesses is worse than none.</p>
+    <p><strong>Built.</strong> An authenticated backend where users ask questions about their stored documents. Answers are drawn only from that user's own documents and saved with source citations in a conversation history.</p>
+    <p><strong>Stack.</strong> TypeScript, Node.js, Express, PostgreSQL, Prisma, Zod, JWT</p>
+    <p><strong>AI component.</strong> Retrieval of relevant document chunks, then answer generation grounded in those chunks. Retrieval is keyword-based today; semantic search is next.</p>
+    <p class="links"><a href="https://github.com/Cheyi-f/capstone-backend">GitHub, DocuChat</a><a href="DOCUCHAT-LIVE">Live demo, DocuChat</a></p>
+   </div>
+   <div class="card">
+    <p class="tag">Group project <span class="pill">Group Stack</span></p>
+    <h3>AI-POWERED PUBLIC TRANSPORTATION PREDICTION SYSTEM</h3>
+    <p><strong>Problem.</strong> <span>Many people in Nigeria spend a lot of time waiting for buses and other forms of public transport.
+      They may also face heavy traffic, overcrowded vehicles, and uncertainty about how long their journey will take.
+      Transport operators may also find it difficult to know where more of their services will be needed at different times of the day.
+      This leads to wasted time, overcrowding, and poor transportation services.</span></p>
+    <p><strong>Proposed solution.</strong> <span>We propose an AI-powered transportation system that helps people know how long they may wait for transport and how long their journey may take.</span></p>
+    <p class="links"><a href="https://docs.google.com/document/d/1l3crI6ISkLjCtNak4kz4Wqd77zYpZ4-b_ZSdIL4CSng/edit?usp=sharing">Group project, overview</a></p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section section--tint" id="case-studies" aria-labelledby="cs-title">
+ <div class="container">
+  <div class="head">
+   <h2 id="cs-title">Case Studies</h2>
+   <p>Written the way I would explain them in an interview: what the problem was, how it works, what I did myself, and what went wrong.</p>
+  </div>
+
+  <article class="cs" aria-labelledby="cs1">
+   <div class="cs__title"><h3 id="cs1">DocuChat</h3><span class="pill">Guided bootcamp project</span></div>
+   <div class="bento">
+    <div class="b b--12">
+     <h4>How a question travels through the system</h4>
+     <ol class="flow" aria-label="Request flow: Client, Route, Controller, Service, Repository, Database and LLM">
+      <li style="--i:0">Client</li><li style="--i:1">Route</li><li style="--i:2">Controller</li><li style="--i:3">Service</li><li style="--i:4">Repository</li><li style="--i:5">Postgres + LLM</li>
+     </ol>
+     <p class="note">Layered architecture: routes handle HTTP, controllers parse input, services hold business logic, repositories are the only layer that touches the database.</p>
+    </div>
+    <div class="b"><h4>Problem</h4><p>Answers pulled from long documents are only useful if you can trust them, and a language model will happily invent one.</p></div>
+    <div class="b"><h4>Solution</h4><p>A document Q&amp;A backend that answers only from the asking user's own documents, saves source citations with each answer, and replies with a fixed "nothing relevant found" message, without calling the model, when retrieval comes back empty.</p></div>
+    <div class="b"><h4>AI component</h4>
+     <p><strong>Retrieval:</strong> keyword matching over document chunks, limited to the user's own documents that have finished processing.</p>
+     <p><strong>Generation:</strong> the retrieved chunks go to an LLM with instructions to answer only from the excerpts, treat them as reference material rather than instructions, and not invent facts or sources. Output is capped at 500 tokens.</p>
+     <p class="note"><strong>Not built yet:</strong> embedding-based (semantic) retrieval.</p></div>
+    <div class="b"><h4>Engineering decisions</h4>
+     <ul>
+      <li>Every retrieval query is filtered by the authenticated user's ID.</li>
+      <li>Requests and environment config are validated with Zod, so bad input is rejected early.</li>
+      <li>Chat routes sit behind JWT middleware, and a conversation you do not own returns 404.</li>
+      <li>The LLM call lives behind one function, <code>generateAnswer(question, chunks)</code>, so the provider can change without touching chat logic.</li>
+     </ul></div>
+    <div class="b"><h4>Stack</h4>
+     <ul class="chips"><li>TypeScript</li><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>Prisma</li><li>Zod</li><li>JWT</li><li>OpenAI SDK</li></ul>
+     </div>
+    
+    <div class="b"><h4>Challenges</h4><p>My OpenAI account has no credits and I cannot buy any, so the first live generation call failed with a 429. I am replacing the provider with a free one. I also tried running a model locally with Ollama; its API would not respond on my machine, so that route is parked.</p></div>
+    <div class="b"><h4>What I learned</h4><p>Passing a compile check does not prove a feature works. I tested retrieval, ownership checks and message history through the real endpoints. The AI call is the one piece that has not yet returned a live answer.</p></div>
+    <div class="b b--12 b--dark"><h4>Evidence</h4>
+     <p>Tested by hand against a running server and a real PostgreSQL database: relevant questions return the matching chunk, irrelevant questions and wrong-user queries return nothing, follow-up messages reuse a conversation, history returns in order, and another user's conversation returns 404.</p>
+     
+     <p class="links links--row" style="margin-top:16px"><a href="https://github.com/Cheyi-f/capstone-backend">GitHub, DocuChat repository</a><a href="DOCUCHAT-LIVE">Live demo, DocuChat</a></p></div>
+   </div>
+  </article>
+
+  <article class="cs" aria-labelledby="cs2">
+   <div class="cs__title"><h3 id="cs2">AI-POWERED PUBLIC TRANSPORTATION PREDICTION SYSTEM</h3><span class="pill">Group project</span></div>
+   <div class="bento">
+    <div class="b"><h4>Problem</h4><p>Many people in Nigeria spend a lot of time waiting for buses and other forms of public transport.
+      They also face heavy traffic, overcrowded vehicles, and uncertainty about how long their journey will take.
+      Transport operators also find it difficult to know where more of their services will be needed at different times of the day.
+      This leads to wasted time, overcrowding, and poor transportation services.</p></div>
+    <div class="b"><h4>Solution</h4><p>We propose an AI-powered transportation system that helps people know how long they may wait for transport and how long their journey may take.
+      The system can also tell transport operators when and where many passengers are likely
+      to need their services, helping them be available where they are needed.</p></div>
+    <div class="b"><h4>How it works</h4><p>~A passenger enters where they are going.</p>
+      <p>● The system checks available transport routes and current information.</p>
+      <p>● AI studies the information.</p>
+      <p>● The system estimates the waiting and travel time.</p>
+      <p>● The passenger receives the information and can choose the most suitable option.</p></div>
+    <div class="b"><h4>AI component</h4><p>AI will be used to make predictions.</p>
+      <p>The system can study previous traffic conditions, the number of passengers,
+      time of day and current road conditions to predict:</p>
+      <p>● How long a passenger may wait for transport.</p>
+      <p>● How long a journey may take.</p>
+      <p>● Which routes may be very busy.</p>
+      <p>● Where more passengers are likely to need buses/keke.</p>
+      <p>The normal software can show routes and information, while AI helps predict what is
+      likely to happen.</p></div>
+    
+    <div class="b b--12 b--dark"><h4>Evidence</h4>
+     <p class="links links--row" style="margin-top:16px"><a href="https://docs.google.com/document/d/1l3crI6ISkLjCtNak4kz4Wqd77zYpZ4-b_ZSdIL4CSng/edit?usp=sharing">Group project overview</a></p></div>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+ <div class="container">
+  <div class="head">
+   <h2 id="skills-title">Technical Skills</h2>
+   <div><p>Grouped by what I do with them.</p></div>
+  </div>
+  <div class="cards cards--4">
+   <div class="card"><h3>Programming</h3><ul><li>TypeScript</li><li>HTML</li><li>CSS</li><li>Javascript</li></ul></div>
+   <div class="card"><h3>Backend and APIs</h3><ul><li>Node.js, Express</li><li>REST API design</li><li>JWT authentication</li><li>Zod validation</li></ul></div>
+   <div class="card"><h3>Databases</h3><ul><li>PostgreSQL</li><li>Prisma ORM</li></ul></div>
+   <div class="card"><h3>AI Engineering</h3><ul><li>LLM API integration</li><li>Grounded prompts</li><li>Retrieval for RAG (keyword so far)</li></ul></div>
+   <div class="card"><h3>Tools</h3><ul><li>Git, GitHub</li><li>VS Code</li></ul></div>
+   
+  </div>
+ </div>
+</section>
+
+<section class="section section--tint" id="about" aria-labelledby="about-title">
+ <div class="container">
+  <div class="head">
+   <h2 id="about-title">About and Learning Journey</h2>
+   <p>I am a Computer Engineering student at the Federal University of Technology, Minna, moving from general programming toward backend and AI engineering through the Mastering Backend AI Engineering Bootcamp.</p>
+  </div>
+  <ol class="steps">
+   <li><h3>Before</h3><p>Web development using HTML, CSS, and Javascript.</p></li>
+   <li><h3>What I learned</h3><p>Layered backend architecture, user-scoped data access, JWT authentication, request validation, and grounding LLM prompts in retrieved text.</p></li>
+   <li><h3>What I built</h3><p>DocuChat (guided project) and a group project. See the case studies above.</p></li>
+   <li><h3>Next</h3><p>Expansion of knowledge and establishment of self in the tech space.</p></li>
+  </ol>
+ </div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+ <div class="container">
+  <div class="head">
+   <h2 id="contact-title">Let's build something useful.</h2>
+   <div>
+    <p>I am open to junior backend and AI engineering roles, internships and collaborations.</p>
+    <p class="actions">
+     <a class="btn btn--primary" href="mailto:gomnafaithfulness@gmail.com">Get in touch</a>
+     <a class="btn btn--secondary" href="https://linkedin.com/in/faithfulness-alexander-99602a28a">LinkedIn</a>
+     <a class="btn btn--secondary" href="https://github.com/Cheyi-f">GitHub</a>
+     <a class="btn btn--secondary" href="https://drive.google.com/file/d/1Co8WPo4VmcILCQ-28m3ciy-jH_WCE47V/view?usp=drive_link">CV</a>
+    </p>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer class="footer">
+ <div class="container footer__in">
+  <p><strong>Faithfulness Gomna</strong>, AI Engineer in training</p>
+  <p class="footer__links"><a href="https://github.com/Cheyi-f">GitHub</a><a href="https://linkedin.com/in/faithfulness-alexander-99602a28a">LinkedIn</a><a href="mailto:gomnafaithfulness@gmail.com">Email</a></p>
+  <p>2026</p>
+ </div>
+</footer>
+
+<script>
+(function () {
+ 'use strict';
+ var $ = function (s) { return document.querySelector(s); };
+ var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+ // Mobile menu
+ var toggle = $('.nav__toggle'), menu = $('#menu');
+ function setMenu(o) { menu.classList.toggle('open', o); toggle.setAttribute('aria-expanded', String(o)); }
+ toggle.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+ menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+ document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+ // Scroll reveal
+ if ('IntersectionObserver' in window && !reduced) {
+  var io = new IntersectionObserver(function (es) {
+   es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.08 });
+  Array.prototype.slice.call(document.querySelectorAll('.head, .proj .card, .b, .cards .card, .steps')).forEach(function (el) {
+   el.classList.add('reveal'); io.observe(el);
+  });
+ }
+
+ // Progress line
+ var prog = $('.progress span'), pend = false;
+ window.addEventListener('scroll', function () {
+  if (pend) return; pend = true;
+  requestAnimationFrame(function () {
+   pend = false;
+   var max = document.documentElement.scrollHeight - window.innerHeight;
+   prog.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+  });
+ }, { passive: true });
+
+ // Hero dot field with cursor push
+ var hero = $('.hero'), cv = $('#dots'), ctx = cv.getContext('2d'), copy = $('.hero__copy');
+ var GAP = 28, R = 140, w = 0, h = 0, fade = null, vis = true, raf = 0;
+ var mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, on: false };
+ function size() {
+  var d = Math.min(window.devicePixelRatio || 1, 2), hr = hero.getBoundingClientRect(), c = copy.getBoundingClientRect();
+  w = hero.clientWidth; h = hero.clientHeight;
+  cv.width = w * d; cv.height = h * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+  fade = { l: c.left - hr.left, t: c.top - hr.top, r: c.right - hr.left, b: c.bottom - hr.top };
+  draw(performance.now());
+ }
+ function fadeAt(x, y) {
+  var dx = Math.max(fade.l - x, 0, x - fade.r), dy = Math.max(fade.t - y, 0, y - fade.b);
+  return 0.12 + 0.88 * Math.min(Math.sqrt(dx * dx + dy * dy) / 90, 1);
+ }
+ function draw(t) {
+  var s = reduced ? 0 : t * 0.001, cols = Math.ceil(w / GAP) + 1, rows = Math.ceil(h / GAP) + 1, i, j;
+  ctx.clearRect(0, 0, w, h);
+  mouse.x += (mouse.tx - mouse.x) * 0.12; mouse.y += (mouse.ty - mouse.y) * 0.12;
+  for (i = 0; i < cols; i++) for (j = 0; j < rows; j++) {
+   var bx = i * GAP, by = j * GAP;
+   var x = bx + Math.cos(j * 0.35 + s * 0.7) * 2, y = by + Math.sin(i * 0.35 + s * 0.8) * 3 + Math.cos(j * 0.3 + s * 0.6) * 2;
+   var n = 0, dx = x - mouse.x, dy = y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
+   if (!reduced && d < R) { n = 1 - d / R; n = n * n * (3 - 2 * n); x += dx / (d || 1) * n * 14; y += dy / (d || 1) * n * 14; }
+   var g = n > 0.35 ? (n - 0.35) / 0.65 : 0;
+   ctx.globalAlpha = fadeAt(bx, by);
+   ctx.fillStyle = 'rgb(' + Math.round(196 + (15 - 196) * g) + ',' + Math.round(196 + (81 - 196) * g) + ',' + Math.round(196 + (50 - 196) * g) + ')';
+   ctx.beginPath(); ctx.arc(x, y, 1.4 + n * 1.8, 0, 6.2832); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+ }
+ function loop(t) { if (!vis || document.hidden) { raf = 0; return; } draw(t); raf = requestAnimationFrame(loop); }
+ function wake() { if (!reduced && !raf && vis && !document.hidden) raf = requestAnimationFrame(loop); }
+ new IntersectionObserver(function (e) { vis = e[0].isIntersecting; wake(); }).observe(hero);
+ document.addEventListener('visibilitychange', wake);
+ var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 120); });
+ hero.addEventListener('pointermove', function (e) {
+  if (e.pointerType === 'touch') return;
+  var r = hero.getBoundingClientRect(); mouse.tx = e.clientX - r.left; mouse.ty = e.clientY - r.top;
+  if (!mouse.on) { mouse.x = mouse.tx; mouse.y = mouse.ty; mouse.on = true; }
+ });
+ hero.addEventListener('pointerleave', function () { mouse.tx = mouse.ty = -9999; mouse.on = false; });
+ size(); wake();
+})();
+</script>
+</body>
+</html>
